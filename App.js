@@ -1,12 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import SearchScreen from './src/components/SearchScreen';
+import TabNavigatorComp from './src/components/TabNavigatorComp';
+import Home from './src/screens/Home';
+
+//Remove this at certain times
+console.disableYellowBox = true;
+
 
 export default function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: '#000',
+
+      }}>
+
+
+      <TabNavigatorComp />
+      {/* <SearchScreen /> */}
+      <StatusBar style="light" backgroundColor="black" />
     </View>
   );
 }
