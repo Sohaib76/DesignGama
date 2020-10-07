@@ -32,6 +32,7 @@ export default function SearchScreen({ navigation }) {
                     name='keyboard-backspace'
                     type='materialicons'
                     color='#fff'
+                    onPress={() => navigation.goBack()}
 
 
                 />}
