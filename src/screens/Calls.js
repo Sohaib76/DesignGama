@@ -31,7 +31,7 @@ const list = [
 export default function Calls() {
   return (
     <View style={{ backgroundColor: "#000", height: "100%" }}>
-      <HeaderMenu isCenterText={true} leftIcon="video-outline" rightIcon="magnify" text="Calls" />
+      <HeaderMenu isCenterText={true} leftIcon="video-outline" rightIcon="magnify" text="Calls" callMenu={true} />
       <ScrollView>
         <CallList sectionHeading="RECENT CALLS" namesList={list} />
         <CallList sectionHeading="SUGGESTED" namesList={[list[0]]} />

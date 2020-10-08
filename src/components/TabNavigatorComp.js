@@ -12,6 +12,9 @@ import Invite from '../screens/Invite';
 // import { Button, } from 'react-native-paper';
 import { Icon, Button } from 'react-native-elements'
 import AddNumber from '../screens/AddNumber';
+import SearchScreen2 from '../screens/SearchScreen2';
+import Notifications from '../screens/Notifications';
+import NavigationSetting from '../screens/NavigationSetting';
 
 
 
@@ -37,6 +40,15 @@ function ContactsStackScreen({ navigation, route }) {
       <ContactsStack.Screen
         options={{ headerShown: false, }}
         name="Search" component={SearchScreen} />
+      <ContactsStack.Screen
+        options={{ headerShown: false, }}
+        name="Search2" component={SearchScreen2} />
+
+
+      <ContactsStack.Screen
+        options={{ headerShown: false, }}
+        name="NavigationSetting" component={NavigationSetting} />
+
       <ContactsStack.Screen
         options={{
           headerTitle: "Share and connect",
@@ -78,6 +90,37 @@ function ContactsStackScreen({ navigation, route }) {
         }}
 
         name="AddNumber" component={AddNumber} />
+
+
+
+      <ContactsStack.Screen
+        options={{
+          headerTitle: "Notifications",
+          headerStyle: { backgroundColor: '#000' },
+          headerTitleStyle: { color: "white" },
+          headerBackTitleStyle: { color: "white" },
+          headerLeftContainerStyle: { paddingLeft: 20 },
+          headerLeft: () => (
+            <Icon name='keyboard-backspace'
+              type="materialicons"
+              color="#fff"
+              onPress={() => navigation.reset({
+                index: 0,
+                routes: [{ name: 'Contacts' }],
+              })} />
+          ),
+          headerRight: () => (
+            <Icon
+              name="dots-vertical"
+              type='material-community'
+              color='#fff'
+              size={30}
+              onPress={() => navigation.navigate("NavigationSetting")}
+            />
+          )
+        }}
+
+        name="Notifications" component={Notifications} />
     </ContactsStack.Navigator>
   );
 }

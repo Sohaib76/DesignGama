@@ -4,12 +4,19 @@ import { Header, Icon, Avatar, Badge, } from 'react-native-elements';
 import { Menu, } from 'react-native-paper';
 
 
-export default function HeaderMenu({ isCenterText, leftIcon, rightIcon, text, chatMenu }) {
+export default function HeaderMenu({ isCenterText, leftIcon, rightIcon, text, chatMenu, contactMenu, callMenu, searchBtn, notBtn }) {
     const [visible, setVisible] = React.useState(false);
 
     const openMenu = () => setVisible(true);
 
     const closeMenu = () => setVisible(false);
+
+
+    const [visibleCon, setVisibleCon] = React.useState(false);
+    const openMenuCon = () => setVisibleCon(true);
+    const closeMenuCon = () => setVisibleCon(false);
+
+
     return (
 
 
@@ -19,7 +26,16 @@ export default function HeaderMenu({ isCenterText, leftIcon, rightIcon, text, ch
 
 
             }}
-            leftComponent={{ size: 30, icon: "bell-outline", color: '#fff', type: "material-community" }}
+            leftComponent={() =>
+                <Icon
+                    name="bell-outline"
+                    type='material-community'
+                    color='#fff'
+                    size={30}
+                    style={{ marginRight: 10 }}
+                    onPress={notBtn}
+                />
+            }
             centerComponent={
                 <View>
                     {
@@ -55,10 +71,11 @@ export default function HeaderMenu({ isCenterText, leftIcon, rightIcon, text, ch
                         color='#fff'
                         size={30}
                         style={{ marginRight: 10 }}
+                        onPress={searchBtn}
                     />
 
                     {
-                        chatMenu ? (
+                        chatMenu && (
                             <Menu
                                 statusBarHeight={93}
                                 contentStyle={{ fontWeight: "bold", width: 230, marginLeft: -60 }}
@@ -81,7 +98,9 @@ export default function HeaderMenu({ isCenterText, leftIcon, rightIcon, text, ch
                             </Menu>
 
                         )
-                            :
+                    }
+                    {
+                        callMenu && (
                             <Icon
                                 name={rightIcon}
                                 type='material-community'
@@ -89,7 +108,31 @@ export default function HeaderMenu({ isCenterText, leftIcon, rightIcon, text, ch
                                 size={30}
                                 onPress={openMenu}
                             />
+                        )
                     }
+
+
+
+
+                    {
+                        contactMenu && (
+                            <Menu
+                                statusBarHeight={93}
+                                contentStyle={{ fontWeight: "bold", width: 230, marginLeft: -60 }}
+                                visible={visibleCon}
+                                onDismiss={closeMenuCon}
+                                anchor={<Icon
+                                    name={rightIcon}
+                                    type='material-community'
+                                    color='#fff'
+                                    size={30}
+                                    onPress={openMenuCon}
+                                />}>
+                                <Menu.Item onPress={() => { }} title="Only show active contacts" />
+                            </Menu>
+                        )
+                    }
+
 
 
                 </View>

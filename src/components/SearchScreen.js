@@ -2,13 +2,12 @@ import React from 'react'
 import { View, Text, KeyboardAvoidingView, Platform } from 'react-native'
 import { SearchBar, Icon } from 'react-native-elements';
 import { List } from 'react-native-paper';
+import SearchBarComponent from './SearchBar';
 
 export default function SearchScreen({ navigation }) {
 
 
-    const [searchQuery, setSearchQuery] = React.useState('');
 
-    const updateSearch = query => setSearchQuery(query);
 
     return (
         <View style={{ height: "100%", backgroundColor: "#000" }}>
@@ -16,36 +15,7 @@ export default function SearchScreen({ navigation }) {
             {/* style={{ marginTop: 40 }}
           enabled={false}
         > */}
-            <SearchBar
-                placeholder={"Search"}
-                onChangeText={updateSearch}
-                value={searchQuery}
-                inputStyle={{ fontSize: 30, color: "white", fontWeight: "bold" }}
-                platform="default"
-                placeholderTextColor="#ccf6ff"
-                containerStyle={{ backgroundColor: '#0090ce', height: "25%", paddingTop: 50 }}
-                inputContainerStyle={{
-                    backgroundColor: "#0090ce", height: "100%",
-
-                }}
-                searchIcon={() => <Icon
-                    name='keyboard-backspace'
-                    type='materialicons'
-                    color='#fff'
-                    onPress={() => navigation.goBack()}
-
-
-                />}
-                clearIcon={() => <Icon
-                    name='close-o'
-                    type='evilicon'
-                    color='#fff'
-                    size={30}
-                    onPress={() => setSearchQuery("")}
-
-
-                />}
-            />
+            <SearchBarComponent navigation={navigation} />
 
             <Text style={{ color: "grey", fontSize: 15, margin: 20 }}
             >Search for people using their Skype Name, phone number, email or full name.</Text>
