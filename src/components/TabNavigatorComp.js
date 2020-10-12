@@ -15,6 +15,7 @@ import AddNumber from '../screens/AddNumber';
 import SearchScreen2 from '../screens/SearchScreen2';
 import Notifications from '../screens/Notifications';
 import NavigationSetting from '../screens/NavigationSetting';
+import VideoChat from '../screens/VideoChat';
 
 
 
@@ -46,8 +47,22 @@ function ContactsStackScreen({ navigation, route }) {
 
 
       <ContactsStack.Screen
-        options={{ headerShown: false, }}
-        name="NavigationSetting" component={NavigationSetting} />
+        // options={{ headerShown: false, }}
+        name="NavigationSetting" component={NavigationSetting}
+        options={{
+          headerTitle: "Notifications",
+          headerStyle: { backgroundColor: '#000' },
+          headerTitleStyle: { color: "white" },
+          headerBackTitleStyle: { color: "white" },
+          headerLeftContainerStyle: { paddingLeft: 20 },
+          headerLeft: () => (
+            <Icon name='keyboard-backspace'
+              type="materialicons"
+              color="#fff"
+              onPress={() => { navigation.navigate("Notifications") }} />
+          ),
+        }}
+      />
 
       <ContactsStack.Screen
         options={{
@@ -126,6 +141,104 @@ function ContactsStackScreen({ navigation, route }) {
 }
 
 
+
+const CallsStack = createStackNavigator();
+
+function CallsStackScreen({ navigation, route }) {
+  if (route.state && route.state.index > 0) {
+    navigation.setOptions({ tabBarVisible: false })
+  }
+  else {
+    navigation.setOptions({ tabBarVisible: true })
+  }
+
+  return (
+    <CallsStack.Navigator initialRouteName="Contacts">
+      <CallsStack.Screen
+        options={{ headerShown: false, }}
+        name="Calls" component={Calls} />
+
+      <CallsStack.Screen
+        options={{ headerShown: false, }}
+        name="Search2" component={SearchScreen2} />
+
+
+      <CallsStack.Screen
+        options={{
+          headerTitle: "Notifications",
+          headerStyle: { backgroundColor: '#000' },
+          headerTitleStyle: { color: "white" },
+          headerBackTitleStyle: { color: "white" },
+          headerLeftContainerStyle: { paddingLeft: 20 },
+          headerLeft: () => (
+            <Icon name='keyboard-backspace'
+              type="materialicons"
+              color="#fff"
+              onPress={() => navigation.reset({
+                index: 0,
+                routes: [{ name: 'Calls' }],
+              })} />
+          ),
+          headerRight: () => (
+            <Icon
+              name="dots-vertical"
+              type='material-community'
+              color='#fff'
+              size={30}
+              onPress={() => navigation.navigate("NavigationSetting")}
+            />
+          )
+        }}
+
+        name="Notifications" component={Notifications} />
+
+      <CallsStack.Screen
+        // options={{ headerShown: false, }}
+        name="NavigationSetting" component={NavigationSetting}
+        options={{
+          headerTitle: "Notifications",
+          headerStyle: { backgroundColor: '#000' },
+          headerTitleStyle: { color: "white" },
+          headerBackTitleStyle: { color: "white" },
+          headerLeftContainerStyle: { paddingLeft: 20 },
+          headerLeft: () => (
+            <Icon name='keyboard-backspace'
+              type="materialicons"
+              color="#fff"
+              onPress={() => { navigation.navigate("Notifications") }} />
+          ),
+        }}
+      />
+
+      <CallsStack.Screen
+        // options={{ headerShown: false, }}
+        name="VideoChat" component={VideoChat}
+        options={{
+          headerTitle: "",
+          headerStyle: { backgroundColor: '#000' },
+          headerTitleStyle: { color: "#000" },
+          headerBackTitleStyle: { color: "white" },
+          headerLeftContainerStyle: { paddingLeft: 20 },
+          headerLeft: () => (
+            <Icon name='cross'
+              type="entypo"
+              color="#fff"
+              onPress={() => navigation.reset({
+                index: 0,
+                routes: [{ name: 'Calls' }],
+              })} />
+          ),
+        }}
+      />
+    </CallsStack.Navigator>
+
+  )
+}
+
+
+
+
+
 function HomeScreen() {
   return (
     <View style={{ backgroundColor: "black", height: "100%" }}>
@@ -191,7 +304,7 @@ export default function TabNavigatorComp() {
 
       >
         <Tab.Screen name="Chats" component={HomeScreen} />
-        <Tab.Screen name="Calls" component={CallsScreen} />
+        <Tab.Screen name="Calls" component={CallsStackScreen} />
         <Tab.Screen name="Contacts" component={ContactsStackScreen} />
       </Tab.Navigator>
     </NavigationContainer>

@@ -15,7 +15,7 @@ export default function Invite() {
             <Card style={{ margin: 50, elevation: 2, borderRadius: 20 }}>
 
                 <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
-                <Card.Title titleStyle={{ fontWeight: "bold" }} title="Your Name" />
+                <Card.Title titleStyle={{ fontWeight: "bold" }} title="adam jhonson" />
 
 
             </Card>

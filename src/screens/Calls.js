@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Alert } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
 import { FAB } from 'react-native-paper';
 import CallList from '../components/CallList';
@@ -28,10 +28,25 @@ const list = [
 ]
 
 
-export default function Calls() {
+export default function Calls({ navigation }) {
   return (
     <View style={{ backgroundColor: "#000", height: "100%" }}>
-      <HeaderMenu isCenterText={true} leftIcon="video-outline" rightIcon="magnify" text="Calls" callMenu={true} />
+      <HeaderMenu isCenterText={true} leftIcon="video-outline" rightIcon="magnify" text="Calls" callMenu={true}
+        rightBtn={() => navigation.navigate("Search2")}
+        notBtn={() => navigation.navigate("Notifications")}
+        searchBtn={() => Alert.alert("Camera", "Grant Skype Permission to access your camera.",
+          [{
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+          { text: "OK", onPress: () => navigation.navigate("VideoChat") }
+
+          ], { cancelable: false }
+
+
+        )}
+      />
       <ScrollView>
         <CallList sectionHeading="RECENT CALLS" namesList={list} />
         <CallList sectionHeading="SUGGESTED" namesList={[list[0]]} />
