@@ -32,6 +32,8 @@ export default function Calls({ navigation }) {
   return (
     <View style={{ backgroundColor: "#000", height: "100%" }}>
       <HeaderMenu isCenterText={true} leftIcon="video-outline" rightIcon="magnify" text="Calls" callMenu={true}
+        backIcon="bell-outline" inCenter={true}
+        twoIcons={true}
         rightBtn={() => navigation.navigate("Search2")}
         notBtn={() => navigation.navigate("Notifications")}
         searchBtn={() => Alert.alert("Camera", "Grant Skype Permission to access your camera.",
@@ -69,7 +71,7 @@ export default function Calls({ navigation }) {
         icon="phone-plus"
         color="#0090ce"
 
-        onPress={() => console.log('Pressed')}
+        onPress={() => navigation.navigate("NewCall")}
       />
 
 

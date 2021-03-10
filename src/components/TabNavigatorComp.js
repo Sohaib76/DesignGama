@@ -16,6 +16,9 @@ import SearchScreen2 from '../screens/SearchScreen2';
 import Notifications from '../screens/Notifications';
 import NavigationSetting from '../screens/NavigationSetting';
 import VideoChat from '../screens/VideoChat';
+import NewCall from '../screens/NewCall';
+import NewContact from '../screens/NewContact';
+import Message from '../screens/Message';
 
 
 
@@ -230,9 +233,95 @@ function CallsStackScreen({ navigation, route }) {
           ),
         }}
       />
+
+      <CallsStack.Screen name="NewCall" component={NewCall}
+        options={{ headerShown: false }}
+      />
     </CallsStack.Navigator>
 
   )
+}
+
+const HomeStack = createStackNavigator();
+
+function HomeStackScreen({ navigation, route }) {
+  if (route.state && route.state.index > 0) {
+    navigation.setOptions({ tabBarVisible: false })
+  }
+  else {
+    navigation.setOptions({ tabBarVisible: true })
+  }
+
+
+  return (
+    <HomeStack.Navigator initialRouteName="Chats">
+      <HomeStack.Screen
+        options={{ headerShown: false, }}
+        name="Chats" component={Home} />
+
+      <HomeStack.Screen
+        options={{ headerShown: false, }}
+        name="NewContact" component={NewContact} />
+
+      <HomeStack.Screen
+        options={{
+          headerTitle: "Notifications",
+          headerStyle: { backgroundColor: '#000' },
+          headerTitleStyle: { color: "white" },
+          headerBackTitleStyle: { color: "white" },
+          headerLeftContainerStyle: { paddingLeft: 20 },
+          headerLeft: () => (
+            <Icon name='keyboard-backspace'
+              type="materialicons"
+              color="#fff"
+              onPress={() => navigation.reset({
+                index: 0,
+                routes: [{ name: 'Chats' }],
+              })} />
+          ),
+          headerRight: () => (
+            <Icon
+              name="dots-vertical"
+              type='material-community'
+              color='#fff'
+              size={30}
+              onPress={() => navigation.navigate("NavigationSetting")}
+            />
+          )
+        }}
+
+        name="Notifications" component={Notifications} />
+
+
+      <HomeStack.Screen
+        // options={{ headerShown: false, }}
+        name="NavigationSetting" component={NavigationSetting}
+        options={{
+          headerTitle: "Notifications",
+          headerStyle: { backgroundColor: '#000' },
+          headerTitleStyle: { color: "white" },
+          headerBackTitleStyle: { color: "white" },
+          headerLeftContainerStyle: { paddingLeft: 20 },
+          headerLeft: () => (
+            <Icon name='keyboard-backspace'
+              type="materialicons"
+              color="#fff"
+              onPress={() => { navigation.navigate("Notifications") }} />
+          ),
+        }}
+      />
+
+      <HomeStack.Screen
+        options={{ headerShown: false, }}
+        name="Search2" component={SearchScreen2} />
+
+      <HomeStack.Screen
+        options={{ headerShown: false, }}
+        name="Message" component={Message} />
+
+    </HomeStack.Navigator>
+  )
+
 }
 
 
@@ -303,7 +392,7 @@ export default function TabNavigatorComp() {
         }}
 
       >
-        <Tab.Screen name="Chats" component={HomeScreen} />
+        <Tab.Screen name="Chats" component={HomeStackScreen} />
         <Tab.Screen name="Calls" component={CallsStackScreen} />
         <Tab.Screen name="Contacts" component={ContactsStackScreen} />
       </Tab.Navigator>

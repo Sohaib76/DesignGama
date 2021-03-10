@@ -4,7 +4,7 @@ import { Header, Icon, Avatar, Badge, } from 'react-native-elements';
 import { Menu, } from 'react-native-paper';
 
 
-export default function HeaderMenu({ isCenterText, leftIcon, rightIcon, text, chatMenu, contactMenu, callMenu, searchBtn, notBtn, rightBtn }) {
+export default function HeaderMenu({ inCenter, backIcon, isCenterText, leftIcon, rightIcon, text, chatMenu, contactMenu, callMenu, searchBtn, notBtn, rightBtn }) {
     const [visible, setVisible] = React.useState(false);
 
     const openMenu = () => setVisible(true);
@@ -28,7 +28,7 @@ export default function HeaderMenu({ isCenterText, leftIcon, rightIcon, text, ch
             }}
             leftComponent={() =>
                 <Icon
-                    name="bell-outline"
+                    name={backIcon}
                     type='material-community'
                     color='#fff'
                     size={30}
@@ -41,6 +41,7 @@ export default function HeaderMenu({ isCenterText, leftIcon, rightIcon, text, ch
                     {
                         isCenterText ? <Text style={{
                             color: 'white', fontSize: 20, fontWeight: 'bold'
+                            , marginLeft: inCenter ? 0 : -120
                         }}>{text}</Text> : (
                                 <>
                                     <Avatar

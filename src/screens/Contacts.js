@@ -37,6 +37,7 @@ export default function Contacts({ navigation }) {
         <Provider >
             <View style={{ backgroundColor: "black", height: "100%" }}>
                 <HeaderMenu isCenterText={true} leftIcon="magnify" rightIcon="dots-vertical" text="Contacts" contactMenu={true}
+                    backIcon="bell-outline"
                     searchBtn={() => navigation.navigate("Search2")}
                     notBtn={() => navigation.navigate("Notifications")}
                 />
